@@ -1,6 +1,22 @@
-const MusicModel = require("../model/Music.Model.js")
+const mongoose = require("mongoose")
+
+const MusicSchema = new mongoose.Schema({
+
+    title: {
+        type: String,
+        required: true,
+    },
+    artist: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
+
+},
+    { timestamps: true })
 
 
+const MusicModel = mongoose.model("Music", MusicSchema)
 
 
 

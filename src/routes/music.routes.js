@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router();
+const { createMusic } = require("../controller/music.controller.js")
 
 
-const 
-
+router.post("/uploadmusic", createMusic)
 
 
 
