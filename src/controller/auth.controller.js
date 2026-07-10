@@ -85,10 +85,11 @@ const loginUser = async (req, res) => {
     })
 }
 
-
 const logoutUser = (req, res) => {
-    console.log("logout User")
-    res.send("logout Page")
+
+    res.clearCookie("token")
+    res.status(200).json({ message: "logged out successfully" })
+
 }
 
 

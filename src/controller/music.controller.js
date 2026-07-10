@@ -54,7 +54,6 @@ const createMusic = async (req, res) => {
 
 }
 
-
 const createAlbum = async (req, res) => {
 
     const token = req.cookies.token
@@ -101,11 +100,13 @@ const createAlbum = async (req, res) => {
 
 }
 
-
 const getAllMusic = async (req, res) => {
 
     try {
-        const musics = await MusicModel.find().populate("artist", "name email")
+        const musics = await MusicModel
+            .find()
+            .limit(2)
+            .populate('artist', 'name email')
         res.status(200).json({ message: "All Music Retrieved Successfully", musics })
     }
     catch (error) {
@@ -115,4 +116,37 @@ const getAllMusic = async (req, res) => {
 
 }
 
-module.exports = { createMusic, createAlbum, getAllMusic }  
+const getAllAlbums = async (req, res) => {
+
+    try {
+        const albums = await AlbumModel.find().select("title artist ").populate('artist', 'name email')
+        res.status(200).json({ message: "All Albums Retrieved Successfully", albums })
+    }
+    catch (error) {
+        console.log(error, "error in getAllAlbums")
+        res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+
+}
+
+const getAlbumById = async (req, res) => {
+
+    const albumId = req.params.albumId
+
+    if (!albumId) {
+        res.status(301).json({ message: "you have entered wrong id" })
+    }
+
+    const album = await AlbumModel.findById(albumId).populate('musics', 'title url').populate('artist', 'name email')
+
+    return res.status(201).json({
+        "message": "album fetch successfully",
+        album: album
+    })
+
+}
+
+
+
+
+module.exports = { createMusic, createAlbum, getAllMusic, getAllAlbums, getAlbumById }  
