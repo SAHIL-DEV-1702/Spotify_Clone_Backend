@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 const cookie = require("cookie-parser")
 const { set } = require('mongoose')
 
+
 const registerUser = async (req, res) => {
 
     const { name, email, password, role } = req.body
