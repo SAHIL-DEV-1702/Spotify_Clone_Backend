@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
 
     const token = jwt.sign(
         {
-            _id: user._id,
+            id: user._id,
             email: user.email,
             role: user.role
         },
@@ -88,8 +88,12 @@ const loginUser = async (req, res) => {
 
 const logoutUser = (req, res) => {
 
-    res.clearCookie("token")
-    res.status(200).json({ message: "logged out successfully" })
+    try {
+        res.clearCookie("token")
+        res.status(200).json({ message: "logged out successfully" })
+    } catch (error) {
+        res.status(401).json({ "messege": "failed to logout" })
+    }
 
 }
 

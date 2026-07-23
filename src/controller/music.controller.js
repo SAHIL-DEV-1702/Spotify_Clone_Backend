@@ -7,13 +7,14 @@ const createMusic = async (req, res) => {
 
     const token = req.cookies.token
 
-    // console.log(token)
+
     if (!token) {
         return res.status(401).json({ message: "Unauthorized" })
     }
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        console.log(decoded);
         if (decoded.role !== "artist") {
             return res.status(403).json({ message: "You Dont Have Access To Create Music" })
         }
@@ -28,7 +29,7 @@ const createMusic = async (req, res) => {
         const newMusic = new MusicModel({
             title,
             url: result.url,
-            artist: req.user.id
+            artist: decoded.id
         })
 
         await newMusic.save()
@@ -105,7 +106,6 @@ const getAllMusic = async (req, res) => {
     try {
         const musics = await MusicModel
             .find()
-            .limit(2)
             .populate('artist', 'name email')
         res.status(200).json({ message: "All Music Retrieved Successfully", musics })
     }
