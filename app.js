@@ -23,7 +23,9 @@ app.use("/api/music", musicroute)
 
 connectDb()
 
-app.listen(8000, (req, res) => {
+const PORT = process.env.PORT || 8000
 
-    console.log("Server Run On PortNo", 8000)
+app.listen(PORT, (req, res) => {
+
+    console.log("Server Run On port", PORT)
 })
