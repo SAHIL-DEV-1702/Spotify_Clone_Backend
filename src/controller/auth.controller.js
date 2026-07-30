@@ -97,7 +97,6 @@ const logoutUser = (req, res) => {
 
 }
 
-
 const getCurrentUser = async (req, res) => {
     try {
         const user = await UserModal
@@ -111,4 +110,4 @@ const getCurrentUser = async (req, res) => {
 };
 
 
-module.exports = { registerUser, loginUser, logoutUser }
+module.exports = { registerUser, loginUser, logoutUser, getCurrentUser }
