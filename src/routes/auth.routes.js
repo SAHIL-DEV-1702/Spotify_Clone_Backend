@@ -11,7 +11,7 @@ router.post("/register", registerValidator, registerUser)
 
 router.post("/login", loginValidator, loginUser)
 
-router.get("/logout", authUser, logoutUser)
+router.get("/logout", logoutUser)
 
 router.get("/me", authUser, getCurrentUser);
 
