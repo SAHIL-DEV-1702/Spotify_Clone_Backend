@@ -10,13 +10,18 @@ const musicroute = require('./src/routes/music.routes.js')
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({
-    origin: process.env.App_Origin,
-    credentials: true,
-}
-))
-
-
+// app.use(cors(
+//     {
+//         origin: process.env.App_Origin || process.env.local,
+//         credentials: true,
+//     }
+// ))
+app.use(
+    cors({
+        origin: true,
+        credentials: true,
+    })
+);
 
 app.use("/api/auth", authroute)
 app.use("/api/music", musicroute)
