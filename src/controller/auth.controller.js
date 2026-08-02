@@ -31,15 +31,6 @@ const registerUser = async (req, res) => {
         role: role
     }
     )
-
-    const token = jwt.sign(
-        {
-            id: user._id,
-            email: user.email,
-            role: user.role
-        },
-        process.env.JWT_SECRET
-    )
     console.log(token)
     res.cookie("token", token)
     res.status(200).json({ message: "user created successfully", user })
@@ -75,7 +66,13 @@ const loginUser = async (req, res) => {
         role: user.role
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({
         message: "loggedinn successfully", user: {
             email: user.email,
