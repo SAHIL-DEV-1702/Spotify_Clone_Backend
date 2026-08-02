@@ -16,4 +16,6 @@ router.get("/getAlbums", authUser, getAllAlbums)
 
 router.get("/albums/:albumId", authUser, getAlbumById)
 
+router.delete("/music/:id",authUser,deleteMusic)
+
 module.exports = router
