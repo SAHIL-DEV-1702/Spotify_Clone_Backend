@@ -13,6 +13,6 @@ router.post("/login", loginValidator, loginUser)
 
 router.get("/logout", logoutUser)
 
-router.get("/me", authUser, getCurrentUser);
+router.get("/me", authUser, getCurrentUser)
 
 module.exports = router
