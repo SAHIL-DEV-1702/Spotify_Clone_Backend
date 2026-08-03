@@ -146,7 +146,38 @@ const getAlbumById = async (req, res) => {
 
 }
 
+const deleteMusic = async (req, res) => {
+
+    const musicId = req.params.id
+
+    if (!musicId) {
+        return res.status(400).json({ message: "Invalid music id" })
+    }
+
+    try {
+        const music = await MusicModel.findById(musicId)
+
+        if (!music) {
+            return res.status(404).json({ message: "Music not found" })
+        }
+
+       
+        if (!req.user || req.user.role !== 'artist' || req.user.id !== music.artist.toString()) {
+            return res.status(403).json({ message: "You don't have permission to delete this music" })
+        }
+
+        await MusicModel.findByIdAndDelete(musicId)
+
+        return res.status(200).json({ message: "Music deleted successfully" })
+    }
+    catch (error) {
+        console.log(error, "error in deleteMusic")
+        return res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+
+}
 
 
 
-module.exports = { createMusic, createAlbum, getAllMusic, getAllAlbums, getAlbumById }  
+
+module.exports = { createMusic, createAlbum, getAllMusic, getAllAlbums, getAlbumById, deleteMusic }  
