@@ -99,7 +99,7 @@ music-streaming-app/
 │   ├── routes/
 │   ├── uploads/
 │   ├── config/
-│   ├── server.js
+│   ├── app.js
 │   └── package.json
 │
 ├── screenshots/
@@ -112,30 +112,36 @@ music-streaming-app/
 ## 🚀 Installation
 
 ### Clone Repository
+## 🚀 Installation
+
+### Clone the Frontend Repository
 
 ```bash
-git clone https://github.com/SAHIL-DEV-1702/music-streaming-app.git
+git clone https://github.com/SAHIL-DEV-1702/Spotify_Clone_Frontend.git
 ```
 
-Move into the project directory:
+Move into the frontend project directory:
 
 ```bash
-cd music-streaming-app
-```
-
-Install frontend dependencies:
-
-```bash
-cd client
+cd Spotify_Clone_Frontend
 npm install
 ```
 
-Install backend dependencies:
+---
+
+### Clone the Backend Repository
 
 ```bash
-cd ../server
+git clone https://github.com/SAHIL-DEV-1702/Spotify_Clone_Backend.git
+```
+
+Move into the backend project directory:
+
+```bash
+cd Spotify_Clone_Backend
 npm install
 ```
+
 
 ---
 
