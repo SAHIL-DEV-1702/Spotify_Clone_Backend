@@ -181,7 +181,7 @@ const getMyMusics = async (req, res) => {
     try {
 
         const musics = await MusicModel.find({
-            artist: req.user._id, 
+            artist: req.user.id,
         }).populate("artist", "name");
 
         return res.status(200).json({
