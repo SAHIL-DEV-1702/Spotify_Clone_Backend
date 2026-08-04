@@ -31,10 +31,7 @@ const registerUser = async (req, res) => {
         role: role
     }
     )
-    console.log(token)
-    res.cookie("token", token)
     res.status(200).json({ message: "user created successfully", user })
-
 }
 
 const loginUser = async (req, res) => {
