@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router();
-const { createMusic, createAlbum, getAllMusic, getAllAlbums, getAlbumById, deleteMusic } = require("../controller/music.controller.js")
+const { createMusic, createAlbum, getAllMusic, getAllAlbums, getAlbumById, deleteMusic, getMyMusics } = require("../controller/music.controller.js")
 const multer = require("multer");
 const { authArtist, authUser, } = require("../middlewares/auth.middleware.js");
 const storage = multer.memoryStorage();
@@ -15,6 +15,8 @@ router.get("/getallmusic", authUser, getAllMusic)
 router.get("/getAlbums", authUser, getAllAlbums)
 
 router.get("/albums/:albumId", authUser, getAlbumById)
+
+router.get("/my-musics", authArtist, getMyMusics);
 
 // Only the artist who uploaded the music can delete it
 router.delete("/music/:id", authArtist, deleteMusic)

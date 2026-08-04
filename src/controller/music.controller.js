@@ -177,7 +177,28 @@ const deleteMusic = async (req, res) => {
 
 }
 
+const getMyMusics = async (req, res) => {
+    try {
+
+        const musics = await MusicModel.find({
+            artist: req.user._id, 
+        }).populate("artist", "name");
+
+        return res.status(200).json({
+            success: true,
+            musics,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
 
 
 
-module.exports = { createMusic, createAlbum, getAllMusic, getAllAlbums, getAlbumById, deleteMusic }  
+
+
+module.exports = { createMusic, createAlbum, getAllMusic, getAllAlbums, getAlbumById, deleteMusic, getMyMusics, }  
