@@ -18,7 +18,6 @@ router.get("/albums/:albumId", authUser, getAlbumById)
 
 router.get("/my-musics", authArtist, getMyMusics);
 
-// Only the artist who uploaded the music can delete it
-router.delete("/music/:id", authArtist, deleteMusic)
+router.delete("/:id", authArtist, deleteMusic)
 
 module.exports = router
