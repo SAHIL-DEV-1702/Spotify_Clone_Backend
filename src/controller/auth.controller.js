@@ -8,31 +8,46 @@ const { set } = require('mongoose')
 
 
 const registerUser = async (req, res) => {
+    try {
+        const { name, email, password, role } = req.body;
 
-    const { name, email, password, role } = req.body
+        if (!name || !email || !password || !role) {
+            return res.status(400).json({
+                message: "All fields are required",
+            });
+        }
 
-    const isAlreadyExists = await UserModal.findOne({
-        $or: [
-            { email },
-            { name }
-        ]
-    })
+        const isAlreadyExists = await UserModal.findOne({
+            $or: [{ email }, { name }],
+        });
 
-    if (isAlreadyExists) {
-        return res.status(409).json("user already exists")
+        if (isAlreadyExists) {
+            return res.status(409).json({
+                message: "User already exists",
+            });
+        }
+
+        const hash = await bcrypt.hash(password, 10);
+
+        const user = await UserModal.create({
+            name,
+            email,
+            password: hash,
+            role,
+        });
+
+        const { password: _, ...userWithoutPassword } = user._doc;
+
+        res.status(201).json({
+            message: "User created successfully",
+            user: userWithoutPassword,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
     }
-
-    const hash = await bcrypt.hash(password, 10)
-
-    const user = await UserModal.create({
-        name: name,
-        email: email,
-        password: hash,
-        role: role
-    }
-    )
-    res.status(200).json({ message: "user created successfully", user })
-}
+};
 
 const loginUser = async (req, res) => {
 
