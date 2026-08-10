@@ -8,6 +8,7 @@ const connectDb = require("./src/db/Db.Connection.js")
 const authroute = require('./src/routes/auth.routes.js')
 const musicroute = require('./src/routes/music.routes.js')
 
+
 app.use(express.json())
 app.use(cookieParser())
 const allowedOrigins = [

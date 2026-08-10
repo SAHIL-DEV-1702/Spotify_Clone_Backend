@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-
+const ratelimit = require('express-rate-limit')
 
 const authArtist = async (req, res, next) => {
 
@@ -43,4 +43,9 @@ const authUser = async (req, res, next) => {
     }
 }
 
-module.exports = { authArtist, authUser }
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+});
+
+module.exports = { authArtist, authUser, loginLimiter }

@@ -104,9 +104,20 @@ const createAlbum = async (req, res) => {
 const getAllMusic = async (req, res) => {
 
     try {
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit)
+        const skip = (page - 1) * limit;
+
         const musics = await MusicModel
             .find()
             .populate('artist', 'name email')
+            .skip(skip)
+            .find(limit)
+
+        const totalMusic = await MusicModel.countDocuments();
+
+        const hasMore = skip + musics.length < totalMusic;
+
         res.status(200).json({ message: "All Music Retrieved Successfully", musics })
     }
     catch (error) {
@@ -161,7 +172,7 @@ const deleteMusic = async (req, res) => {
             return res.status(404).json({ message: "Music not found" })
         }
 
-       
+
         if (!req.user || req.user.role !== 'artist' || req.user.id !== music.artist.toString()) {
             return res.status(403).json({ message: "You don't have permission to delete this music" })
         }
