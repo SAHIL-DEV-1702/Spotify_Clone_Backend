@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const ratelimit = require('express-rate-limit')
+const rateLimit = require('express-rate-limit')
 
 const authArtist = async (req, res, next) => {
 
