@@ -112,7 +112,7 @@ const getAllMusic = async (req, res) => {
             .find()
             .populate('artist', 'name email')
             .skip(skip)
-            .find(limit)
+            .limit(limit)
 
         const totalMusic = await MusicModel.countDocuments();
 
