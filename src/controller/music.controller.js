@@ -122,7 +122,11 @@ const getAllMusic = async (req, res) => {
     }
     catch (error) {
         console.log(error, "error in getAllMusic")
-        res.status(500).json({ message: "Internal Server Error", error: error.message })
+        res.status(500).json({
+            message: "Internal Server Error", error: error.message,
+            musics,
+            hasMore
+        })
     }
 
 }
