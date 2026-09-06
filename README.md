@@ -11,6 +11,13 @@ A full-stack **Music Streaming Application** built with **React**, **Node.js**, 
 
 ---
 
+## 🌐 Live Demo
+
+🔗 **Musicify – Live Application:**  
+https://musicifys.netlify.app/
+
+> Try the application live and explore the music streaming features.
+
 ## 📖 Overview
 
 This project allows users to create an account, log in securely, browse available songs, and enjoy music using a custom player. Administrators have exclusive access to upload new music and manage the application's content.
